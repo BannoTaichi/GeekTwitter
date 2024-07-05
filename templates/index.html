@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/create" role="button">新規投稿画面</a>
+{% for post in posts %}
+<article>
+    <h2>{{post.title}}</h2>
+    <a href="/{{post.id}}/update" role = "button">編集</a>
+    <a href="/{{post.id}}/delete" role = "button">削除</a>
+    <p>作成日時： {{post.created_at}}</p>
+    <p>{{post.body}}</p>
+</article>
+{% endfor %}
+
+
+{% endblock %}

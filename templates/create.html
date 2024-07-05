@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>新規投稿</h1>
+<form action="/create" method = "POST">
+    <label for = "title">タイトル</label>
+    <input type="text" name = "title">
+    <label for="body">内容</label>
+    <input type="text" name="body">
+    <input type="submit" value="新規投稿">
+</form>
+{{title}}
+{{body}}
+
+
+{% endblock %}
