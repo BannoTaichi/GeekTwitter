@@ -4,10 +4,18 @@ TOPページ
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
     <h1>GeekTwitter</h1>
     <a href="/create" role="button">新規投稿画面</a>
     <a href="/logout" role="button">ログアウト</a>
+    <div class ="search">
+        <form method="POST">
+            <input type="text" name="search" class="form-label">
+            <input type="submit" value="検索" class="btn btn-primary">
+    
+        </form>
+    </div>
     {% for post in posts %}
     <article>
         <h2>{{post.title}}</h2>

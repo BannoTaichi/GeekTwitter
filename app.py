@@ -2,8 +2,11 @@
 # conda install flask==3.0.3, flask-login==0.6.3, pytz
 # pip3 install flask_sqlalchemy==3.1.1, flask-bootstrap=3.3.7.1
 
+# conda activate twitter
+
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap
@@ -18,6 +21,7 @@ app = Flask(__name__)
 # blog.dbという名前のデータベースを作成
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 app.config["SECRET_KEY"] = os.urandom(24)
+
 # os.urandomで暗号化のためのランダムな値を作成
 # "SECRET_KEY"という環境変数に設定（入れなきゃいけない）
 db = SQLAlchemy(app)
@@ -40,8 +44,8 @@ class Post(db.Model):
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(30), unique=True)
-    password = db.Column(db.String(12))
+    username = db.Column(db.String(30), nullable=False, unique=True)
+    password = db.Column(db.String(20))
 
 
 @login_manager.user_loader
@@ -49,22 +53,41 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+def top():
+    return render_template("top.html")
+
+
+@app.route("/index", methods=["GET", "POST"])
 @login_required
 def index():
-    if request.method == "GET":
-        posts = Post.query.all()
+    if request.method == "POST":
+        # posts = Post.query.all()
+        text_input = request.form.get("search")
+        print(f"text_input : {text_input}")
+        if (text_input is None) or len(text_input) == 0:
+            posts = Post.query.all()
+        else:
+            posts = (
+                db.session.query(Post)
+                .filter(
+                    or_(
+                        Post.body.contains(text_input),
+                        Post.title.contains(text_input),
+                        # Post.created_at.contains(text_input),
+                    )
+                )
+                .all()
+            )
         return render_template("index.html", posts=posts)
     else:
-        return render_template("index.html")
+        posts = Post.query.all()
+        return render_template("index.html", posts=posts)
 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    if request.method == "GET":
-        return render_template("signup.html")
-
-    elif request.method == "POST":
+    if request.method == "POST":
         username = request.form["username"]
         password = request.form.get("password")
 
@@ -76,6 +99,8 @@ def signup():
         db.session.commit()  # データの反映
 
         return redirect("/login")
+    else:
+        return render_template("signup.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -88,7 +113,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if check_password_hash(user.password, password):
             login_user(user)
-            return redirect("/")
+            return redirect("/index")
     else:
         return render_template("login.html")
 
@@ -114,7 +139,9 @@ def create():
         db.session.add(post)  # データの追加
         db.session.commit()  # データの反映
 
-        return redirect("/")  # redirect: "GET"メソッドでそのルートにつなぐことができる
+        return redirect(
+            "/index"
+        )  # redirect: "GET"メソッドでそのルートにつなぐことができる
 
 
 @app.route("/<int:id>/update", methods=["GET", "POST"])
@@ -130,7 +157,9 @@ def update(id):
 
         db.session.commit()  # データの反映
 
-        return redirect("/")  # redirect: "GET"メソッドでそのルートにつなぐことができる
+        return redirect(
+            "/index"
+        )  # redirect: "GET"メソッドでそのルートにつなぐことができる
 
 
 @app.route("/<int:id>/delete", methods=["GET"])
@@ -139,7 +168,7 @@ def delete(id):
     post = Post.query.get(id)  # 引数idでインスタンス化
     db.session.delete(post)
     db.session.commit()
-    return redirect("/")
+    return redirect("/index")
 
 
 if __name__ == "__main__":

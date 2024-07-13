@@ -1,4 +1,7 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
+{% block title %}
+ユーザー登録ページ
+{% endblock %}
 
 {% block content %}
 <h1>ユーザー登録</h1>
@@ -7,7 +10,7 @@
     <input type="text" name = "username">
     <label for="password">パスワード</label>
     <input type="password" name="password">
-    <input type="submit" value="新規投稿">
+    <input type="submit" value="新規登録">
 </form>
 
 {% endblock %}
