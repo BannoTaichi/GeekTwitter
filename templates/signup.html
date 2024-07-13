@@ -6,11 +6,11 @@
 {% block content %}
 <h1>ユーザー登録</h1>
 <form method = "POST">
-    <label for = "username">ユーザー名</label>
-    <input type="text" name = "username">
-    <label for="password">パスワード</label>
-    <input type="password" name="password">
-    <input type="submit" value="新規登録">
+    <label for = "username" class="form-label">ユーザー名</label>
+    <input type="text" name = "username" class="form-control">
+    <label for="password" class="form-label">パスワード</label>
+    <input type="password" name="password" class="form-control">
+    <input type="submit" value="新規登録" class="btn btn-primary">
 </form>
 
 {% endblock %}
