@@ -1,16 +1,18 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
+{% block title %}
+新規投稿ページ
+{% endblock %}
 
 {% block content %}
-<h1>新規投稿</h1>
-<form action="/create" method = "POST">
-    <label for = "title">タイトル</label>
-    <input type="text" name = "title">
-    <label for="body">内容</label>
-    <input type="text" name="body">
-    <input type="submit" value="新規投稿">
-</form>
-{{title}}
-{{body}}
-
+<div class="container">
+    <h1>新規投稿</h1>
+    <form action="/create" method = "POST">
+        <label for = "title" class="form-label">タイトル</label>
+        <input type="text" name = "title" class="form-control">
+        <label for="body" class="form-label">内容</label>
+        <textarea name="body" class="form-control" id="body" rows="5"></textarea>
+        <input type="submit" value="新規投稿" class="btn btn-primary">
+    </form>
+</div>
 
 {% endblock %}
