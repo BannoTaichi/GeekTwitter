@@ -1,12 +1,11 @@
-{% extends "bootstrap/base.html" %}
+{% extends "base.html" %}
 {% block title %}
 新規投稿ページ
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1><b>GeekTwitter</b></h1>
-    <h1>新規投稿</h1>
+    <h1><b>新規投稿</b></h1>
     <form action="/create" method = "POST">
         <label for = "title" class="form-label">タイトル</label>
         <input type="text" name = "title" class="form-control">

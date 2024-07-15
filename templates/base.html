@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeekTwitter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/sample.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sample.css">
 </head>
 <body class="base">
-    <h1>GeekTwitter</h1>
+    
+    <image src="images/GeekSalon.jpg" style="height: 100px; margin-left: 50px; margin-bottom: 20px;"></image>
+    <span class="container" style="font-size: 40px;"><b>GeekTwitter</b></span>
 
     {% block content %}
     {% endblock %}

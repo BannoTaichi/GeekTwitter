@@ -16,7 +16,7 @@ import pytz
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./templates/images")
 
 # blog.dbという名前のデータベースを作成
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
