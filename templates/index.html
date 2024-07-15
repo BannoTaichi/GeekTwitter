@@ -6,10 +6,10 @@ TOPページ
 {% block content %}
 
 <div class="container">
-    <h1>GeekTwitter</h1>
+    <h1><b>GeekTwitter</b></h1>
     <a href="/create" role="button">新規投稿画面</a>
     <a href="/logout" role="button">ログアウト</a>
-    <div class ="search">
+    <div class="container text-right">
         <form method="POST">
             <input type="text" name="search" class="form-label">
             <input type="submit" value="検索" class="btn btn-primary">
@@ -17,12 +17,14 @@ TOPページ
         </form>
     </div>
     {% for post in posts %}
-    <article>
-        <h2>{{post.title}}</h2>
-        <a href="/{{post.id}}/update" role = "button">編集</a>
-        <a href="/{{post.id}}/delete" role = "button">削除</a>
-        <p>作成日時： {{post.created_at}}</p>
-        <p>{{post.body}}</p>
+    <article class="row">
+        <h3 class="containre text-left"><b>{{post.title}}</b></h3>
+        <div class="container text-right">
+            <a href="/{{post.id}}/update" role = "button">編集</a>
+            <a href="/{{post.id}}/delete" role = "button">削除</a>
+        </div>
+        <p class="container text-right">作成日時： {{post.created_at}}</p>
+        <p class="container-left">{{post.body}}</p>
     </article>
 {% endfor %}
 </div>

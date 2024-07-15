@@ -5,15 +5,20 @@
 
 {% block content %}
 <div class="container">
-    <h1>Geek Twitter にログイン</h1>
+    <h1><b>GeekTwitter</b></h1><br>
     <form method = "POST">
         <label for ="username" class="form-label">ユーザー名</label>
         <input type="text" name = "username" class="form-control">
-        <label for="password" class="form-label">パスワード</label>
+        <br><label for="password" class="form-label">パスワード</label>
         <input type="password" name="password" class="form-control">
-        <input type="submit" value="ログイン" class="btn btn-primary">
+        <br><input type="submit" value="ログイン" class="btn btn-primary">
     </form>
-    <a href="/signup">アカウント作成</a>
+    <br><a href="/signup">アカウント作成</a>
 </div>
+{% if texts %}
+{% for text in texts %}
+<h3 class="container"><b>{{text}}</b></h3>
+{% endfor %}
+{% endif %}
 
 {% endblock %}

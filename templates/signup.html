@@ -4,13 +4,22 @@
 {% endblock %}
 
 {% block content %}
-<h1>ユーザー登録</h1>
-<form method = "POST">
-    <label for = "username" class="form-label">ユーザー名</label>
-    <input type="text" name = "username" class="form-control">
-    <label for="password" class="form-label">パスワード</label>
-    <input type="password" name="password" class="form-control">
-    <input type="submit" value="新規登録" class="btn btn-primary">
-</form>
+<div class="container">
+    <h1><b>GeekTwitter</b></h1><br>
+    <!-- <h1>ユーザー登録</h1> -->
+    <form method = "POST">
+        <label for = "username" class="form-label">ユーザー名</label>
+        <input type="text" name = "username" class="form-control">
+        <br><label for="password" class="form-label">パスワード</label>
+        <input type="password" name="password" class="form-control">
+        <br><input type="submit" value="新規登録" class="btn btn-primary">
+        <br><br><a href="/login">ログイン画面へ遷移</a>
+    </form>
+</div>
+{% if texts %}
+{% for text in texts %}
+<h3 class="container"><b>{{text}}</b></h3>
+{% endfor %}
+{% endif %}
 
 {% endblock %}

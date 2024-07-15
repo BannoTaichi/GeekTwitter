@@ -5,13 +5,14 @@
 
 {% block content %}
 <div class="container">
+    <h1><b>GeekTwitter</b></h1>
     <h1>編集画面</h1>
     <form method="POST">
             <label for="title" class="form-label">タイトル</label>
             <input type="text" name="title" value="{{post.title}}" class="form-control" id="title">
             <label for="body" class="form-label">内容</label>
             <textarea name="body" class="form-control" id="body" rows="5" oninput="countCharacters()">{{post.body}}</textarea>
-            <p>文字数：<span id="count">0</span> / 300</p>
+            <p>文字数：<span id="count">{{length}}</span></p>
             <script>
                 function countCharacters() {
                   const textBox = document.getElementById("body");

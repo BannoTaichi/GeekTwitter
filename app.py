@@ -36,7 +36,7 @@ class Post(db.Model):
         db.Integer, primary_key=True
     )  # primary_key : それぞれの投稿を判断する主Key
     title = db.Column(db.String(50), nullable=False)
-    body = db.Column(db.String(300), nullable=False)
+    body = db.Column(db.String(400), nullable=False)
     created_at = db.Column(
         db.DateTime, nullable=False, default=datetime.now(pytz.timezone("Asia/Tokyo"))
     )
@@ -55,14 +55,13 @@ def load_user(user_id):
 
 @app.route("/")
 def top():
-    return render_template("top.html")
+    return render_template("login.html")
 
 
 @app.route("/index", methods=["GET", "POST"])
 @login_required
 def index():
     if request.method == "POST":
-        # posts = Post.query.all()
         text_input = request.form.get("search")
         print(f"text_input : {text_input}")
         if (text_input is None) or len(text_input) == 0:
@@ -88,17 +87,23 @@ def index():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form.get("password")
+        try:
+            username = request.form["username"]
+            password = request.form.get("password")
 
-        user = User(
-            username=username,
-            password=generate_password_hash(password, method="scrypt"),
-        )  # インスタンス化
-        db.session.add(user)  # データの追加
-        db.session.commit()  # データの反映
-
-        return redirect("/login")
+            user = User(
+                username=username,
+                password=generate_password_hash(password, method="scrypt"),
+            )  # インスタンス化
+            db.session.add(user)  # データの追加
+            db.session.commit()  # データの反映
+            return redirect("/login")
+        except:
+            texts = [
+                "そのユーザー名は既に登録されています！",
+                "別のユーザー名をご登録ください",
+            ]
+            return render_template("signup.html", texts=texts)
     else:
         return render_template("signup.html")
 
@@ -106,14 +111,27 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form.get("password")
+        try:
+            username = request.form["username"]
+            password = request.form.get("password")
 
-        # usernameでフィルターをかけて合致したものを持ってくる
-        user = User.query.filter_by(username=username).first()
-        if check_password_hash(user.password, password):
-            login_user(user)
-            return redirect("/index")
+            # usernameでフィルターをかけて合致したものを持ってくる
+            user = User.query.filter_by(username=username).first()
+            if check_password_hash(user.password, password):
+                login_user(user)
+                return redirect("/index")
+            else:
+                texts = [
+                    "パスワードが異なります！",
+                    "パスワードを忘れた場合はアカウントを作成しなおしてください",
+                ]
+                return render_template("login.html", texts=texts)
+        except:
+            texts = [
+                "ユーザー名が異なります！",
+                "未登録の場合はアカウントを作成してください",
+            ]
+            return render_template("login.html", texts=texts)
     else:
         return render_template("login.html")
 
@@ -149,7 +167,8 @@ def create():
 def update(id):
     post = Post.query.get(id)  # 引数idでインスタンス化
     if request.method == "GET":
-        return render_template("update.html", post=post)
+        length = len(post.body)
+        return render_template("update.html", post=post, length=length)
 
     else:
         post.title = request.form["title"]  # 内容の更新（上書き）
