@@ -2,22 +2,32 @@
 {% block content %}
 
 <div class="container">
-    <div class="container">
-        <form method="POST">
-            <input type="text" name="search" class="form-label my-3">
-            <input type="submit" value="検索" class="btn btn-primary my-3">
-    
-        </form>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="container col-md-6">
+            <form method="POST">
+                <input type="text" name="search" class="form-label my-3">
+                <input type="submit" value="検索" class="btn btn-primary my-3">
+            </form>
+        </div>
     </div>
     {% for post in posts %}
-    <article class="row">
-        <h3 class="containre text-left"><b>{{post.title}}</b></h3>
-        <div class="container text-right">
-            <a href="/{{post.id}}/update" role = "button">編集</a>
-            <a href="/{{post.id}}/delete" role = "button">削除</a>
+    <article>
+        <div class="container py-2 post-box">
+            <div class="row card-effect">
+                <h3 class="text-center mx-auto py-3"><b>{{post.title}}</b></h3>
+                <div class="col-md-10"></div>
+                <div class="col-md-2 mx-auto">
+                    <a href="/{{post.id}}/update" role = "button">編集</a>
+                    <a href="/{{post.id}}/delete" role = "button">削除</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <p class="col-md-5">作成日時： {{post.created_at}}</p>
+                </div>
+                <p class="container">{{post.body}}</p>
+            </div>
         </div>
-        <p class="container ms-auto">作成日時： {{post.created_at}}</p>
-        <p class="container-left">{{post.body}}</p>
     </article>
 {% endfor %}
 </div>

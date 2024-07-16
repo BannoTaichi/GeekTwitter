@@ -12,19 +12,25 @@
             --primary: #0d6efd;
             --dark: rgb(34, 34, 34);
             --body: rgb(248, 248, 248);
+            --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.8);
         }body{
-            /* padding-bottom: 27px; */
+            margin-bottom: 120px;
             padding-top: 80px;
             background-color: var(--body);
             font-family: "Sora", sans-serif;
             line-height: 1.7;
             color: var(--dark);
+            background: linear-gradient(black, white, black);
         }a, h3{
-            color: var(--body);
+            color: var(--dark);
             text-decoration: none;
             font-weight: 700;
+        }a{
+            text-decoration: underline;
+        }a:hover{
+            color: blue;
         }p{
-            color: var(--body);
+            color: var(--dark);
         }.navbar{
             background-color: var(--dark) !important;
         }.navbar .nav-link{
@@ -33,7 +39,8 @@
             font-weight: 700;
         }.vh-100{
             background-image: url(images/shadow.jpg); 
-            background-position: center; background-size: cover; 
+            background-position: center; 
+            background-size: cover; 
             background-attachment: fixed;
             width: 100%;
             position: relative;
@@ -49,7 +56,21 @@
             z-index: -1;
         }.form-label{
             font-weight: 700;
-            color: var(--body);
+            color: var(--dark);
+        }.card-effect{
+            box-shadow: var(--box-shadow);
+        }.post-box{
+            background-color: rgba(214, 214, 214, 0.5);
+        }.alert{
+            position: fixed;
+            margin-left: 30%;
+            text-align: center;
+            margin-top: 12%;
+            padding-top: 2%;
+            border-color: black;
+        }.footer{
+            padding: 1% 0;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -79,13 +100,13 @@
         </div>
       </nav>
     <!-- body -->
-    <div class="body vh-100">
+    <!-- <div class="body vh-100"> -->
         {% block content %}
         {% endblock %}
     </div>
     <!-- footer -->
     <footer class="d-flex justify-content-center fixed-bottom bg-dark text-white">
-        <div><b>© GeekTwitter</b></div>
+        <div class="footer"><b>© GeekTwitter</b></div>
     </footer>
 </body>
 </html>

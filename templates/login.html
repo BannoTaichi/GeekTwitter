@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if texts %}
+<h3 class="alert bg-white col-md-4">
+{% for text in texts %}
+<p><b>{{text}}</b></p>
+{% endfor %}
+</h3>
+{% endif %}
+
 <div class="container">
     <form method = "POST">
-        <br><label for ="username" class="form-label text-white">ユーザー名</label>
+        <br><label for ="username" class="form-label">ユーザー名</label>
         <input type="text" name = "username" class="form-control">
-        <br><label for="password" class="form-label text-white">パスワード</label>
+        <br><label for="password" class="form-label">パスワード</label>
         <input type="password" name="password" class="form-control">
         <br><input type="submit" value="ログイン" class="btn btn-primary">
     </form>
-    <br><a href="/signup" class="text-white">アカウント作成</a>
+    <br><a href="/signup">アカウント作成</a>
 </div>
-
-{% if texts %}
-{% for text in texts %}
-<h3 class="container"><b>{{text}}</b></h3>
-{% endfor %}
-{% endif %}
 
 {% endblock %}
