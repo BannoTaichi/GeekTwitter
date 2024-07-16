@@ -1,25 +1,24 @@
 {% extends "base.html" %}
-{% block title %}
-新規投稿ページ
-{% endblock %}
-
 {% block content %}
-<div class="container">
-    <h1><b>新規投稿</b></h1>
-    <form action="/create" method = "POST">
-        <label for = "title" class="form-label">タイトル</label>
-        <input type="text" name = "title" class="form-control">
-        <label for="body" class="form-label">内容</label>
-        <textarea name="body" class="form-control" id="body" rows="5" oninput="countCharacters()"></textarea>
-        <p>文字数：<span id="count">0</span></p>
-        <script>
-            function countCharacters() {
-              const textBox = document.getElementById("body");
-              const countElement = document.getElementById("count");
-              countElement.innerHTML = textBox.value.length;
-            }
-          </script>
-        <input type="submit" value="新規投稿" class="btn btn-primary">
-    </form>
+
+<div class="vh-100">
+  <div class="container">
+      <form action="/create" method = "POST">
+          <br><label for = "title" class="form-label text-white">タイトル</label>
+          <input type="text" name = "title" class="form-control">
+          <br><label for="body" class="form-label text-white">内容</label>
+          <textarea name="body" class="form-control" id="body" rows="5" oninput="countCharacters()"></textarea>
+          <p><b>文字数：</b><span id="count">0</span></p>
+          <script>
+              function countCharacters() {
+                const textBox = document.getElementById("body");
+                const countElement = document.getElementById("count");
+                countElement.innerHTML = textBox.value.length;
+              }
+            </script>
+          <input type="submit" value="新規投稿" class="btn btn-primary">
+      </form>
+  </div>
+</div>
 
 {% endblock %}

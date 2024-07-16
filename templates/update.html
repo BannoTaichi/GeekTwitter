@@ -1,16 +1,11 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}
-更新ページ
-{% endblock %}
-
+{% extends "base.html" %}
 {% block content %}
+
 <div class="container">
-    
-    <h2><b>編集画面</b></h2>
     <form method="POST">
-            <label for="title" class="form-label">タイトル</label>
+            <br><label for="title" class="form-label">タイトル</label>
             <input type="text" name="title" value="{{post.title}}" class="form-control" id="title">
-            <label for="body" class="form-label">内容</label>
+            <br><label for="body" class="form-label">内容</label>
             <textarea name="body" class="form-control" id="body" rows="5" oninput="countCharacters()">{{post.body}}</textarea>
             <p>文字数：<span id="count">{{length}}</span></p>
             <script>
@@ -23,7 +18,5 @@
         <button type="submit" class="btn btn-primary">更新</button>
     </form>
 </div>
-
-
 
 {% endblock %}

@@ -1,17 +1,11 @@
 {% extends "base.html" %}
-{% block title %}
-TOPページ
-{% endblock %}
-
 {% block content %}
 
 <div class="container">
-    <a href="/create" role="button">新規投稿画面</a>
-    <a href="/logout" role="button">ログアウト</a>
-    <div class="container text-right">
+    <div class="container">
         <form method="POST">
-            <input type="text" name="search" class="form-label">
-            <input type="submit" value="検索" class="btn btn-primary">
+            <input type="text" name="search" class="form-label my-3">
+            <input type="submit" value="検索" class="btn btn-primary my-3">
     
         </form>
     </div>
@@ -22,12 +16,10 @@ TOPページ
             <a href="/{{post.id}}/update" role = "button">編集</a>
             <a href="/{{post.id}}/delete" role = "button">削除</a>
         </div>
-        <p class="container text-right">作成日時： {{post.created_at}}</p>
+        <p class="container ms-auto">作成日時： {{post.created_at}}</p>
         <p class="container-left">{{post.body}}</p>
     </article>
 {% endfor %}
 </div>
-
-
 
 {% endblock %}

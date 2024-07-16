@@ -1,17 +1,14 @@
 {% extends "base.html" %}
-{% block title %}
-ユーザー登録ページ
-{% endblock %}
-
 {% block content %}
+
 <div class="container">
     <form method = "POST">
-        <label for = "username" class="form-label">ユーザー名</label>
+        <br><label for = "username" class="form-label text-white">ユーザー名</label>
         <input type="text" name = "username" class="form-control">
-        <br><label for="password" class="form-label">パスワード</label>
+        <br><label for="password" class="form-label text-white">パスワード</label>
         <input type="password" name="password" class="form-control">
         <br><input type="submit" value="新規登録" class="btn btn-primary">
-        <br><br><a href="/login">ログイン画面へ遷移</a>
+        <br><br><a href="/login" class="text-white">ログイン画面へ遷移</a>
     </form>
 </div>
 {% if texts %}
