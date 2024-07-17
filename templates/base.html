@@ -15,7 +15,7 @@
             --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.8);
         }body{
             height: 1500px;
-            margin-bottom: 120px;
+            margin-bottom: 200px;
             padding-bottom: 120px;
             padding-top: 80px;
             font-family: "Sora", sans-serif;
@@ -24,7 +24,7 @@
         }a, h3{
             color: var(--dark);
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 700;            
         }a{
             text-decoration: underline;
         }a:hover{
@@ -55,8 +55,14 @@
             background-color: rgba(46, 46, 46, 0.7);
             z-index: -1;
         }.form-label{
+            font-size: 25px;
             font-weight: 700;
             color: var(--dark);
+            text-shadow:
+                1px 1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255);
         }.card-effect{
             box-shadow: var(--box-shadow);
         }.post-box{
@@ -99,13 +105,17 @@
           </div>
         </div>
       </nav>
+
     <!-- body -->
     <!-- <div class="body vh-100"> -->
         {% block content %}
         {% endblock %}
-    </div>
+
+    <!-- negative margin -->
+    <div class="my-5 py-5"></div>
+
     <!-- footer -->
-    <footer class="d-flex justify-content-center bg-dark text-white footer my-5">
+    <footer class="d-flex justify-content-center fixed-bottom bg-dark text-white footer">
         <div><b>© GeekTwitter</b></div>
     </footer>
 </body>
