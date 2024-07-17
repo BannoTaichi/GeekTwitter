@@ -7,7 +7,7 @@
         <input type="text" name = "title" class="form-control">
         <br><label for="body" class="form-label">内容</label>
         <textarea name="body" class="form-control" id="body" rows="5" oninput="countCharacters()"></textarea>
-        <p><b>文字数：</b><span id="count">0</span></p>
+        <p class="counter">文字数：<span id="count">0</span></p>
         <script>
             function countCharacters() {
               const textBox = document.getElementById("body");
