@@ -2,7 +2,7 @@
 {% block content %}
 
 {% if texts %}
-<h3 class="alert bg-white col-md-4">
+<h3 class="alert bg-white col-md-8">
 {% for text in texts %}
 <p><b>{{text}}</b></p>
 {% endfor %}
@@ -11,7 +11,7 @@
 
 <div class="container">
     <form method = "POST">
-        <br><label for ="username" class="form-label">ユーザー名</label>
+        <br><label for ="username" class="form-label my-3">ユーザー名</label>
         <input type="text" name = "username" class="form-control">
         <br><label for="password" class="form-label">パスワード</label>
         <input type="password" name="password" class="form-control">
